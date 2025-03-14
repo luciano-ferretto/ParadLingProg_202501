@@ -15,7 +15,7 @@ public class FatorialExamples {
     }
     
     public static void main(String[] args) {
-        int n = 50; // Você pode ajustar esse valor para testar com diferentes entradas
+        int n = 10; // Você pode ajustar esse valor para testar com diferentes entradas
         
         // Teste do método recursivo
         long startTimeRecursivo = System.nanoTime();
