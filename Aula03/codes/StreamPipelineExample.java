@@ -4,8 +4,8 @@ public class StreamPipelineExample {
     public static void main(String[] args) {
         List<String> nomes = List.of("Ana", "Bruno", "Carlos", "Daniel");
         // Nenhuma operação foi executada ainda!
-        var streamPipeline = nomes.stream()
-            .filter(nome -> {
+        var streamPipeline = nomes.stream();
+        streamPipeline.filter(nome -> {
                 System.out.println("Filtrando: " + nome);
                 return nome.startsWith("B");
             })
