@@ -10,7 +10,7 @@ public class Lista {
         List<String> listaTamanhoFixo = Arrays.asList("X", "Y", "Z");
         
         //Testando operações de adição e remoção
-        listaImutavel.add("D");
-        listaTamanhoFixo.remove("X");
+        //listaImutavel.add("D");
+        listaTamanhoFixo.add("X");
     }
 }
