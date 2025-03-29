@@ -3,9 +3,9 @@ public class LSP {
         Cubo cubo = new Cubo(2);
         imprimeArea(cubo);
         imprimeVolume(cubo);
-        Quadrado ret = new Quadrado(3);
-        imprimeArea(ret);
-        imprimeVolume(ret);
+        Quadrado quad = new Quadrado(3);
+        imprimeArea(quad);
+        imprimeVolume(quad);
 
     }
     static void imprimeArea(FormaGeometrica forma) {
@@ -46,8 +46,8 @@ class Quadrado extends FormaGeometrica {
     }
     @Override
     double calculaVolume() {
-        //return 0;
-        throw new UnsupportedOperationException(
-            "Unsupported method 'calculaVolume'");
+        return 0;
+        //throw new UnsupportedOperationException(
+        //    "Unsupported method 'calculaVolume'");
     }
 }

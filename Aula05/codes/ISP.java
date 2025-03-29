@@ -1,5 +1,20 @@
 public class ISP {
-    
+    public static void main(String[] args) {
+        // Criando instâncias de Canarinho e Pinguim
+        Ave canarinho = new Canarinho();
+        Ave pinguim = new Pinguim();
+
+        // Chamando os métodos
+        canarinho.comer();
+        voar(canarinho);
+
+        pinguim.comer();
+        voar(pinguim);
+    }
+    private static void voar(Ave ave) {
+        ave.voar();
+        
+    }
 }
 
 interface Ave {
