@@ -1,0 +1,80 @@
+services:
+
+  # -------------------------------
+  discovery-service:
+    image: discovery-service:latest
+    build:
+      context: ./discovery-service
+    ports:
+      - "8761:8761"
+    networks:
+      - spring-net
+
+  # -------------------------------
+  db-currency:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: db_currency
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - spring-net
+
+  currency-service:
+    image: currency-service:latest
+    build:
+      context: ./currency-service
+    depends_on:
+      - discovery-service
+      - db-currency
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-currency:5432/db_currency
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka
+    networks:
+      - spring-net
+
+  # -------------------------------
+  db-product:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: db_product
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - spring-net
+  product-service:
+    image: product-service:latest
+    build:
+      context: ./product-service
+    depends_on:
+      - discovery-service
+      - db-product
+      - currency-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-product:5432/db_product
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka
+    networks:
+      - spring-net
+
+  # -------------------------------
+  gateway-service:
+    image: gateway-service:latest
+    build:
+      context: ./gateway-service
+    ports:
+      - "8765:8765"
+    depends_on:
+      - discovery-service
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-service:8761/eureka
+    networks:
+      - spring-net
+
+# -------------------------------
+networks:
+  spring-net:
+    driver: bridge
